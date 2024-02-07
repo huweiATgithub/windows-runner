@@ -1,8 +1,6 @@
 name: ROS2 in windows
 on:
   push:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
@@ -19,7 +17,7 @@ jobs:
         shell: cmd
         run: |
           call "%programfiles(x86)%\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-          choco upgrade git -y
+          choco upgrade git -y --no-progress
           git --version
 
       - name: install ROS2 binaries
@@ -29,7 +27,7 @@ jobs:
           mkdir c:\opt\chocolatey
           set ChocolateyInstall=c:\opt\chocolatey
           choco source add -n=ros-win -s="https://aka.ms/ros/public" --priority=1
-          choco upgrade ros-humble-desktop -y --execution-timeout=0 --pre
+          choco upgrade ros-humble-desktop -y --execution-timeout=0 --pre --no-progress
         
       - name: test installation
         shell: cmd

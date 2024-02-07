@@ -1,0 +1,14 @@
+name: ROS2 in windows
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build-packages:
+    runs-on: windows-2019
+    steps:
+      - name: install Chocolatey
+        shell: cmd
+        run: |
+          call "%programfiles(x86)%\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          choco list --source https://aka.ms/ros/public
