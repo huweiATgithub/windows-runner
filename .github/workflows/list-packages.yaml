@@ -11,5 +11,5 @@ jobs:
         shell: cmd
         run: |
           call "%programfiles(x86)%\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-          choco search ros- -s="'https://aka.ms/ros/public'" --id-starts-with
+          choco search ros- -s="'https://aka.ms/ros/public'" --id-starts-with --pre
 
