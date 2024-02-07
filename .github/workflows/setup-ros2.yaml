@@ -12,27 +12,28 @@ jobs:
       - name: install Chocolatey
         shell: cmd
         run: |
-          "%programfiles(x86)%\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          call "%programfiles(x86)%\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
           @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 
       - name: install git
         shell: cmd
         run: |
-          "%programfiles(x86)%\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          call "%programfiles(x86)%\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
           choco upgrade git -y
           git --version
 
       - name: install ROS2 binaries
         shell: cmd
         run: |
-          "%programfiles(x86)%\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          call "%programfiles(x86)%\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
           mkdir c:\opt\chocolatey
           set ChocolateyInstall=c:\opt\chocolatey
           choco source add -n=ros-win -s="https://aka.ms/ros/public" --priority=1
-          choco upgrade ros-foxy-desktop -y --execution-timeout=0 --pre
+          choco upgrade ros-humble-desktop -y --execution-timeout=0 --pre
         
       - name: test installation
         shell: cmd
         run: |
-          c:\opt\ros\foxy\x64\setup.bat
+          call "%programfiles(x86)%\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          call c:\opt\ros\humble\x64\setup.bat
           ros2 wtf
