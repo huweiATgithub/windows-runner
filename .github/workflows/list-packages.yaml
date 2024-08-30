@@ -7,6 +7,13 @@ jobs:
   build-packages:
     runs-on: windows-2019
     steps:
+      - shell: cmd
+        run: |
+          call "%programfiles(x86)%\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+          cmake --system-information information.txt
+          echo "CMake System Information"
+          type information.txt
+          
       - name: install Chocolatey
         shell: cmd
         run: |
